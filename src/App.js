@@ -1,23 +1,40 @@
 import logo from './logo.svg';
 import './App.css';
+import React,{useState} from 'react';
 
 function App() {
+  const[height , setHeight]= useState("")
+  const[weight , setWeight]= useState("")
+  const[bmi , setBmi]= useState("")
+
+  const calculatebmi=()=>{
+    if (height && weight){
+      const h= height/ 100;
+      const result=(weight/(h*h).toFixed(2))
+      setBmi(result)
+    }
+    else{
+      setBmi("please enter valid number")
+    }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>calculatebmi</h1>
+        <input
+        type='number'
+        placeholder='height(cm)'
+        value={height}
+        onChange={(e)=>setHeight(e.target.value)}/>
+         <input
+        type='number'
+        placeholder='weight(cm)'
+        value={weight}
+        onChange={(e)=>setWeight(e.target.value)}/>
+        <button onClick={calculatebmi}>add</button>
+       <h2>bmi ${bmi}</h2>
+      </div>
+     
     </div>
   );
 }
